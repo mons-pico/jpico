@@ -78,6 +78,16 @@ public class PicoInputStream extends InputStream {
 		
 		// Ka-presto!  The header has been read.  Life is good.
 	}
+	
+	/**
+	 * Get the header for this Pico file.  The returned header is a copy of
+	 * the actual header, so no damage can be done.
+	 * 
+	 * @return	The header of this file.
+	 */
+	public PicoHeader getHeader() {
+		return _head.clone();
+	}
 
 	/**
 	 * @see java.io.InputStream#read()
