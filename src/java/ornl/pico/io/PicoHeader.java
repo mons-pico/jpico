@@ -26,6 +26,19 @@ class PicoHeader implements PicoFileOffsets {
     public byte[] key = null;
     /** Specify the file offset to the data. */
     public long offset = 0L;
+    
+    /* (non-Javadoc)
+     * @see java.lang.Object#clone()
+     */
+    @Override
+    public PicoHeader clone() {
+    	// Make a new header instance and then populate it.
+    	PicoHeader newheader = new PicoHeader();
+    	newheader.hash = hash.clone();
+    	newheader.key = key.clone();
+    	newheader.offset = offset;
+    	return newheader;
+    }
 
 	/**
 	 * Populate the header from the provided data chunk.  This does not
