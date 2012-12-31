@@ -15,7 +15,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -26,12 +25,11 @@ import org.junit.Test;
 import ornl.pico.io.PicoException;
 import ornl.pico.io.PicoFile;
 import ornl.pico.io.PicoInputStream;
-import ornl.pico.io.PicoOutputStream;
 
 /**
  * @author Stacy Prowell (prowellsj@ornl.gov)
  */
-public class RoundTrip {
+public class RoundTrip2 {
 	
 	/** The key to use to encode the data. */
 	static byte[] key = {
@@ -78,10 +76,9 @@ public class RoundTrip {
 		// Make a temporary file and Pico-encode the data.
 		tmpfile = File.createTempFile("test", "pico");
 		tmpfile.deleteOnExit();
-		PicoOutputStream pos =
-				new PicoOutputStream(key, new FileOutputStream(tmpfile));
-		pos.write(testdata, 0, testdata.length);
-		pos.close();
+		PicoFile pf = PicoFile.create(tmpfile, key);
+		pf.write(ByteBuffer.wrap(testdata));
+		pf.close();
 	}
 
 	@Test
