@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
+import ornl.pico.PicoException;
+
 /**
  * Encapsulate the content of a Pico wrapper file's header.
  * <p>

@@ -9,11 +9,11 @@
  * All rights reserved.
  *----------------------------------------------------------------------------*/
 
-package ornl.pico.io;
+package ornl.pico;
 
 /**
- * Report a serious error in the Pico file format, typically a mis-formatted
- * Pico header.
+ * Report a serious error encountered by the Pico library.  This can include
+ * incorrect file formats.
  * 
  * @author Stacy Prowell (prowellsj@ornl.gov)
  */

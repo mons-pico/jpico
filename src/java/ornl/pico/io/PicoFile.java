@@ -21,6 +21,8 @@ import java.nio.channels.WritableByteChannel;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import ornl.pico.PicoException;
+
 /**
  * Provide for random access reading and writing of a Pico-encoded file.
  * <p>

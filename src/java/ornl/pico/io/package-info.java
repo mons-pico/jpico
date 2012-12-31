@@ -10,8 +10,9 @@
  *----------------------------------------------------------------------------*/
 
 /**
- * The core package for the Java Pico wrapper.
- * 
+ * The core package implementing the Pico encoding.  Read more about the Pico
+ * encoding at {@linkplain http://mons-pico.github.com/}.
+ * <p>
  * The goal is to create an interface to the Pico file format that hides all
  * the inner details of the format and is <em>nearly</em> as fast as direct
  * native access to the raw bytes.
