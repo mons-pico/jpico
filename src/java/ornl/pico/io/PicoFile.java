@@ -22,29 +22,23 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Provide for random access writing of a Pico-encoded file.
+ * Provide for random access reading and writing of a Pico-encoded file.
  * <p>
- * To use this make an instance wrapping the specified file.  The file can be
- * written via the {@link #write()} and {@link #write(ByteBuffer)} methods, and
- * the writing position can be modified via {@link #position(long)}.  To get
- * the current position within the data, use {@link #position()}.
- * <p>
- * These methods read and write the packaged data, so position zero is the
- * first byte of the packaged data.
+ * To use this create an instance via one of the {@code static} methods.
+ * <ol>
+ * <li>Use {@link #create(File)} or {@link #create(String)} to create a new
+ *     file or replace an existing file.</li>
+ * <li>Use {@link #open(File)} or {@link #open(String)} to open an existing
+ *     file.</li>
+ * </ol>
  * <p>
  * <b>Note</b>: Because the data can be written arbitrarily, but the hash must
- * be computed sequentially, the hash is not available.  Also, if a block of
- * data is left, it is written as nulls, but these are decrypted when read, so
- * be aware of that.  The result will be portions (or repeats) of the encryption
- * key.
+ * be computed sequentially, the hash is not usually available (see
+ * {@link #getHeader()}).
  * <p>
- * This class allows reading of the data via the {@link #read()} and
- * {@link #read(ByteBuffer)} methods, but only data that has been written can
- * be read.
- * <p>
- * <b>Caution</b>: You must invoke {@link #finish()} or {@link #close()} when
- * done to be sure the header is written, since the hash must be computed and
- * written last.
+ * <b>Caution</b>: If you write data, you must invoke {@link #finish()} or
+ * {@link #close()} when done to be sure the header is written, since the hash
+ * must be computed and written last.
  * 
  * @author Stacy Prowell (prowellsj@ornl.gov)
  */
@@ -54,6 +48,37 @@ implements WritableByteChannel, ReadableByteChannel, SeekableByteChannel {
 	//======================================================================
 	// Static methods.
 	//======================================================================
+	
+	/**
+	 * Create or replace a Pico file.  If the file exists it will be replaced.
+	 * If it does not exist it is created.  A random key is used.
+	 * 
+	 * @param filename			The filename.
+	 * @return					The Pico file instance.
+	 * @throws IOException		The file cannot be created.
+	 */
+	public static PicoFile create(String filename) throws IOException {
+		if (filename == null) {
+			throw new NullPointerException("The filename is null.");
+		}
+		return create(filename, KeyUtils.makeKey());
+	}
+	
+	/**
+	 * Create or replace a Pico file.  If the file exists it will be replaced.
+	 * If it does not exist it is created.  A random key is used.
+	 * 
+	 * @param filename			The filename.
+	 * @return					The Pico file instance.
+	 * @throws IOException		The file cannot be created.
+	 */
+	public static PicoFile create(File file)
+			throws IOException {
+		if (file == null) {
+			throw new NullPointerException("The file is null.");
+		}
+		return create(file, KeyUtils.makeKey());
+	}
 	
 	/**
 	 * Create or replace a Pico file.  If the file exists it will be replaced.
