@@ -23,7 +23,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ornl.pico.io.PicoException;
+import ornl.pico.PicoException;
 import ornl.pico.io.PicoFile;
 import ornl.pico.io.PicoInputStream;
 import ornl.pico.io.PicoOutputStream;

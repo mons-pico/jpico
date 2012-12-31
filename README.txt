@@ -43,9 +43,9 @@ Testing
 
 README
 ======
-This is the distribution of a pure Java implementation of the Pico wrapper
-format.  This format is intended for rapid, simple encryption of malware for
-transport and storage.
+This is the distribution of a pure Java implementation of the Pico library.
+At present it includes classes implementing the Pico wrapper format, and little
+else.
 
 Visit the Pico web site at:
 http://mons-pico.github.com/
@@ -53,12 +53,15 @@ http://mons-pico.github.com/
 
 Prerequisites
 =============
-No prerequisites (other than Eclipse) are needed at the present time.
+Pico has no external requirements at this time beyond ant (to build) and java
+(to build and run).
 
 
 Building
 ========
-At present the system build in Eclipse only.
+The system can be built with ant.  Run ant from the root folder (the folder
+that contains build.xml) to build the library from source.  Other targets are
+available: run ant -p for additional target information.
 
 
 Testing
