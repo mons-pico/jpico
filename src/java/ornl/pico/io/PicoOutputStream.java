@@ -73,7 +73,7 @@ public class PicoOutputStream extends OutputStream {
 		}
 		_backing = os;
 		try {
-			_hash = MessageDigest.getInstance(PicoFileOffsets.HASH);
+			_hash = MessageDigest.getInstance(PicoStructure.HASH);
 		} catch (NoSuchAlgorithmException nsae) {
 			throw new RuntimeException("Failed to create hash.", nsae);
 		}
@@ -83,8 +83,7 @@ public class PicoOutputStream extends OutputStream {
 		_encrypted = new FileOutputStream(_tmpfile);
 		// Build the header.
 		_head = new PicoHeader();
-		_head.key = key;
-		
+		_head.setKey(key);
 	}
 
 	/* (non-Javadoc)
@@ -98,7 +97,7 @@ public class PicoOutputStream extends OutputStream {
 		// Add to the message digest.
 		_hash.update((byte) datum);
 		// Encode.
-		datum ^= _head.key[(int) _position % _head.key.length];
+		datum = _head.crypt((byte) datum, _position);
 		// Write.
 		_encrypted.write(datum);
 		_position += 1;
@@ -127,7 +126,7 @@ public class PicoOutputStream extends OutputStream {
 		_head.hash = _hash.digest();
 		
 		// Write the header to the backing store.
-		_backing.write(_head.writeHeader());
+		_backing.write(_head.putHeader());
 		
 		// Write the encrypted data to the backing store.
 		_encrypted.flush();

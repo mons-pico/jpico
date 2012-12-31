@@ -45,7 +45,10 @@ import java.security.NoSuchAlgorithmException;
  * @author Stacy Prowell (prowellsj@ornl.gov)
  * @version {@value MAJOR}.{@value MINOR}
  */
-public interface PicoFileOffsets {
+public interface PicoStructure {
+	
+	/** The position of the start of the header in the file. */
+	static final long HEAD_START = 0L;
 	
 	/** The magic string. */
 	static final byte[] MAGIC = { (byte) 0x91, (byte) 0xc0 };
