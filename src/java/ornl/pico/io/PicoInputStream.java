@@ -14,6 +14,8 @@ package ornl.pico.io;
 import java.io.IOException;
 import java.io.InputStream;
 
+import ornl.pico.PicoException;
+
 /**
  * Implement a simple class for directly reading the unencrypted bytes from
  * a Pico wrapper file.

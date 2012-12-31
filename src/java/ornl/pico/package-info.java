@@ -10,6 +10,8 @@
  *----------------------------------------------------------------------------*/
 
 /**
- * Tests of the pure Java implementation of the Pico file format.
+ * Root package of the pure Java implementation of the Pico library.
+ * 
+ * @author Stacy Prowell (prowellsj@ornl.gov)
  */
-package ornl.pico.io.test;
+package ornl.pico;
