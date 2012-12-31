@@ -15,7 +15,7 @@
  * The goal is to create an interface to the Pico file format that hides all
  * the inner details of the format and is <em>nearly</em> as fast as direct
  * native access to the raw bytes.
- * 
+ * <p>
  * There are two major operations to support.
  * <ol>
  * <li>Writing data to a new file.</li>
@@ -27,13 +27,11 @@
  * access to the data.  To accomplish all this, we use the interfaces of the
  * {@code java.nio.channels} package.  We also provide implementations of
  * both {@code java.io.FileInputStream} and {@code java.io.FileOutputStream}
- * for simple sequential access.
- * 
- * <h2>Reading</h2>
- * The simplest way to read the content of the file is with a
- * {@link PicoInputStream} instance.
- * <pre>
- *   PicoInputFile pif = new PicoInputFile(name);
- * </pre>
+ * for simple sequential access wrapping some underlying stream.
+ * <p>
+ * For random access (read and write) use an instance of
+ * {@link ornl.pico.io.PicoFile}.  To wrap an existing stream, or to provide
+ * a stream to methods that expect one, use {@link ornl.pico.io.PicoInputStream}
+ * and {@link ornl.pico.io.PicoOutputStream}.
  */
 package ornl.pico.io;
